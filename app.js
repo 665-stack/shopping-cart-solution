@@ -2,7 +2,6 @@ function updateProductNumber(product, price, isIncreasing) {
     const productInput = document.getElementById(product + '-number');
     //kono akta var er value jodi reset kora hoy taile shei var ta let diye dite hobe. const diye hobe na. and amra kinto niche if else er modder var er value reset korteci;
     let productNumber = productInput.value;
-    console.log('product number', productNumber)
     if (isIncreasing == true) {
         productNumber = parseInt(productNumber) + 1;
     }
@@ -13,8 +12,27 @@ function updateProductNumber(product, price, isIncreasing) {
     //update product total
     const productTotal = document.getElementById(product + '-total');
     productTotal.innerText = productNumber * price;
-    console.log('product total', productTotal.innerText)
-
+    //calculate total
+    calculateTotal();
+}
+function getInputValue(product) {
+    const productInput = document.getElementById(product + '-number');
+    const productNumber = parseInt(productInput.value);
+    return productNumber;
+}
+function calculateTotal() {
+    const phoneTotal = getInputValue('phone') * 1219;
+    const caseTotal = getInputValue('case') * 59;
+    const subTotal = phoneTotal + caseTotal;
+    console.log('subtotalaskd', subTotal);
+    const tax = subTotal / 10;
+    const totalPrice = subTotal + tax;
+    //update sub-total
+    document.getElementById('sub-total').innerText = subTotal;
+    //update tax-amount 
+    document.getElementById('tax-amount').innerText = tax;
+    //update total-price 
+    document.getElementById('total-price').innerText = totalPrice;
 }
 //phone plus button handler
 document.getElementById('phone-plus').addEventListener('click', function () {
